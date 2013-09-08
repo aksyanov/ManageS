@@ -5,10 +5,10 @@ class Users extends CActiveRecord
 	/**
 	 * The followings are the available columns in table 'tbl_user':
 	 * @var integer $id
-	 * @var string $username
+	 * @var string $login
 	 * @var string $password
-	 * @var string $email
-	 * @var string $profile
+	 * @var string $companies
+	 * @var string $salt
 	 */
 
 	public static function model($className=__CLASS__)
@@ -26,12 +26,11 @@ class Users extends CActiveRecord
 	 */
 	public function rules()
 	{
-		// NOTE: you should only define rules for those attributes that
-		// will receive user inputs.
 		return array(
-			array('login', 'required'),
+			array('login,password', 'required'),
 			array('login', 'length', 'max'=>255),
-            array('id', 'numerical', 'integerOnly'=>true),
+            array('salt,password', 'length', 'max'=>500),
+            array('id,companies_id', 'numerical', 'integerOnly'=>true),
 		);
 	}
 
@@ -49,8 +48,10 @@ class Users extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'id' => 'Id',
+			'id' => 'ID',
 			'login' => 'Login',
+            'password' => 'Password',
+            'companies_id' => 'ID of company',
 		);
 	}
 
@@ -61,7 +62,7 @@ class Users extends CActiveRecord
 	 */
 	public function validatePassword($password)
 	{
-		return crypt($password,$this->password)===$this->password;
+		return md5($this->salt.md5($password.$this->salt))===$this->password;
 	}
 
 	/**
@@ -69,9 +70,9 @@ class Users extends CActiveRecord
 	 * @param string password
 	 * @return string hash
 	 */
-	public function hashPassword($password)
+	public function hashPassword($password,$salt)
 	{
-		return crypt($password, $this->generateSalt());
+		return md5($salt.md5($password.$salt));
 	}
 
 	/**
@@ -106,4 +107,15 @@ class Users extends CActiveRecord
 		$salt.=strtr(substr(base64_encode($rand),0,22),array('+'=>'.'));
 		return $salt;
 	}
+
+    public function afterValidate()
+    {
+        if($this->isNewRecord){
+            $salt = self::generateSalt();
+            $this->password = self::hashPassword($this->password, $salt);
+            $this->salt = $salt;
+            //$this->role = 'user';
+        }
+        return true;
+    }
 }

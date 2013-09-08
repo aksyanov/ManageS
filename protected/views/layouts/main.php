@@ -30,11 +30,14 @@
                 </li>
 
                 <li>
-                    <a class="top_menu_el">&nbsp; Помощь</a>
+                    <a class="top_menu_el" href="index.php/site/Logout">&nbsp; Выход</a>
                 </li>
             </ul>
+        </div>
 
 
+        <div id="mainContent" style="margin-top: 100px">
+            <?php echo $content; ?>
         </div>
 
     </div>

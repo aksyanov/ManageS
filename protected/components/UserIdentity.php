@@ -1,10 +1,5 @@
 <?php
 
-/**
- * UserIdentity represents the data needed to identity a user.
- * It contains the authentication method that checks if the provided
- * data can identity the user.
- */
 class UserIdentity extends CUserIdentity
 {
 	private $_id;
@@ -15,9 +10,11 @@ class UserIdentity extends CUserIdentity
 	 */
 	public function authenticate()
 	{
-        $sql = 'SELECT * FROM  `tbl_users` WHERE `login`="'.$this->username.'" AND `password` = "'.$this->password.'"';
-        $user = Yii::app()->db->createCommand($sql)->queryAll();
-		if(empty($user)){
+        $user=Users::model()->find('login=?',array($this->username));
+
+        //$sql = 'SELECT * FROM  `tbl_users` WHERE `login`="'.$this->username.'" AND `password` = "'.$this->password.'"';
+        //$user = Yii::app()->db->createCommand($sql)->queryAll();
+		/*if(empty($user)){
             $this->errorMessage = "Неправильный логин или пароль";
             $this->errorCode=false;
         }else{
@@ -25,7 +22,19 @@ class UserIdentity extends CUserIdentity
 			$this->username=$user[0]['username'];
 			$this->errorCode=true;
 		}
-		return $this->errorCode;
+		return $this->errorCode;*/
+
+        if($user===null)
+            $this->errorCode=self::ERROR_USERNAME_INVALID;
+        else if(!$user->validatePassword($this->password))
+            $this->errorCode='Invalid password';//.self::ERROR_PASSWORD_INVALID;
+        else
+        {
+            $this->_id=$user->id;
+            $this->username=$user->login;
+            $this->errorCode=self::ERROR_NONE;
+        }
+        return $this->errorCode===self::ERROR_NONE;
 	}
 
 	/**

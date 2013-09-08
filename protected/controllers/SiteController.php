@@ -25,20 +25,20 @@ class SiteController extends CController
     public function accessRules()
     {
         return array(
-            /*array('deny',
-                'actions'=>array('index'),
-                'users'=>array('?'),
-            ),*/
-            /*
             array('deny',
                 'actions'=>array('index'),
-                'users'=>array('*'),
+                'users'=>array('?'),
+            ),
+
+            array('allow',
+                'actions'=>array('index'),
+                'users'=>array('@'),
             ),
 
             array('allow',
                 'actions'=>array('logout'),
                 'users'=>array('*'),
-            ),*/
+            ),
 
         );
     }
@@ -51,24 +51,16 @@ class SiteController extends CController
 
     public function actionLogin(){
 
-       /* $fUs = new Users();
-        $fUs->login = "asdas";
-
-        $fUs->save();*/
-
-        $post=Users::model()->findByPk(1);
-        echo $post->login;
-
-        /*if(isset($_POST['login_b'])){
+        if(isset($_POST['login_b'])){
             $identity = new UserIdentity($_POST['login'],$_POST['password']);
             if($identity->authenticate()){
                 Yii::app()->user->login($identity);
                 $this->redirect(Yii::app()->user->returnUrl);
             }else{
-                echo $identity->errorMessage;
+                echo $identity->errorCode;
             }
         }
-        $this->render('login');*/
+        $this->render('login');
     }
 
     public function actionLogout(){

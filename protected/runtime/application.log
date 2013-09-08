@@ -166,3 +166,24 @@ Stack trace:
 #19 {main}
 REQUEST_URI=/manages/index.php/site/login
 ---
+2013/09/08 11:08:33 [error] [exception.CException] exception 'CException' with message 'Property "UserIdentity.login" is not defined.' in X:\home\localhost\www\ManageS\framework\base\CComponent.php:130
+Stack trace:
+#0 X:\home\localhost\www\ManageS\protected\components\UserIdentity.php(13): CComponent->__get('login')
+#1 X:\home\localhost\www\ManageS\protected\controllers\SiteController.php(56): UserIdentity->authenticate()
+#2 X:\home\localhost\www\ManageS\framework\web\actions\CInlineAction.php(49): SiteController->actionLogin()
+#3 X:\home\localhost\www\ManageS\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#4 X:\home\localhost\www\ManageS\framework\web\filters\CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#5 X:\home\localhost\www\ManageS\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#6 X:\home\localhost\www\ManageS\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#7 X:\home\localhost\www\ManageS\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#8 X:\home\localhost\www\ManageS\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#9 X:\home\localhost\www\ManageS\framework\web\CController.php(291): CFilterChain->run()
+#10 X:\home\localhost\www\ManageS\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#11 X:\home\localhost\www\ManageS\framework\web\CWebApplication.php(282): CController->run('login')
+#12 X:\home\localhost\www\ManageS\framework\web\CWebApplication.php(141): CWebApplication->runController('site/login')
+#13 X:\home\localhost\www\ManageS\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#14 X:\home\localhost\www\ManageS\index.php(9): CApplication->run()
+#15 {main}
+REQUEST_URI=/manages/index.php/site/login
+HTTP_REFERER=http://localhost/manages/index.php/site/login
+---
