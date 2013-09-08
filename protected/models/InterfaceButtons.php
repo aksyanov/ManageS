@@ -2,6 +2,7 @@
 
 class InterfaceButtons extends CActiveRecord
 {
+    public $inMenu = false;
 	/**
 	 * The followings are the available columns in table 'tbl_user':
 	 * @var integer $id

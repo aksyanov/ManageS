@@ -1,57 +1,36 @@
 <?
 class WTopMenu extends CWidget
 {
+    protected $menus;
+    //Yii::app()->clientScript->registerCssFile('css/CUserStatusBars.css');
     public function init()
     {
-        $defUserPic  = '<img src="'.Yii::app()->request->baseUrl.'/img/def_userpic_man.jpg" width="160px">';
-        $settingsImg = '<img src="'.Yii::app()->request->baseUrl.'/img/sys/settings.png" width="30px">';
-        $msgImg = '<img src="'.Yii::app()->request->baseUrl.'/img/sys/msg.png" width="30px">';
-        $infoImg = '<img src="'.Yii::app()->request->baseUrl.'/img/sys/info.png" width="30px">';
-        $logoutImg = '<a href="/site/logout"><img src="'.Yii::app()->request->baseUrl.'/img/sys/logout.png" width="30px"></a>';
-
+        $backgroundImg = '<img src="'.Yii::app()->request->baseUrl.'/img/icons/plus_black.png" width=20px>';
 
         $user = Users::model()->findByPk(Yii::app()->user->getId());
-        $menus = $user->interfaceButtons;
+        $this->menus = $user->interfaceButtons;
+        $menus = $this->menus;
 
         $allHtml = '<ul id="topMenuElements" class="topMenuElements">';
 
         foreach($menus as $menu){
-            if(!$menu->visible) continue;
+            if(!$menu->visible || $menu->inMenu) continue;
 
             $innerButton = '<a class="top_menu_el">'.$menu->synonym.'</a>&nbsp; |';
             if($menu->button){
                 $allHtml.= '<li>'.$innerButton.'</li>';
             }else{
-                $child='<li>asdsad</li>';
-                //getAllChild();
-                $allHtml.= '<li>'.$innerButton.'<ul>'.$child.'</ul></li>';
+                $children = $this->getAllChild($menu->id);
+                $allHtml.= '<li>'.$innerButton.$children.'</li>';
             }
 
         }
 
+        $allHtml.='<li>'.$backgroundImg.'</li>';
         $allHtml.= '</ul>';
 
         echo $allHtml;
 
-        /*echo '
-        <div id="userInfoMain">
-            <div id="userInfoTop">
-                <div id="userInfoLogo">';
-        echo        $defUserPic;
-        echo'   </div>
-                <div id="userInfoButtons">
-                    <div class="elUserInfoButtons">';echo $settingsImg; echo '</div>
-                    <div class="elUserInfoButtons">';echo $msgImg; echo '</div>
-                    <div class="elUserInfoButtons">';echo $infoImg; echo '</div>
-                    <div class="elUserInfoButtons">';echo $logoutImg; echo '</div>
-                </div>
-            </div>
-            <div id="userInfoBot">
-                <div id="userInfoMenu">
-
-                </div>
-            </div>
-        </div>';*/
 
 /*
         $cash_type_count = 0;
@@ -102,6 +81,20 @@ class WTopMenu extends CWidget
 
     public function run()
     {
+    }
+
+    protected function  getAllChild($parentId){
+        $children = '<ul>';
+        $menus = $this->menus;
+        foreach($menus as $menu){
+            if($menu->parent_id==$parentId){
+                $children.= '<li><a>'.$menu->synonym.'</a></li>';
+                $menu->inMenu = true;
+            }
+        }
+        $children.= '</ul>';
+
+        return $children;
     }
 
 }
