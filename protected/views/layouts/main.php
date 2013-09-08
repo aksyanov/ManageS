@@ -11,35 +11,44 @@
     <div id="wrapper">
         <div id="topMenu" class="topMenu">
 
+            <?php
+                if(Yii::app()->user->isGuest){
+            ?>
 
-            <ul id="topMenuElements" class="topMenuElements">
-                <li>
-                    <a class="top_menu_el">Главная</a>&nbsp; |
-                </li>
+                <ul id="topMenuElements" class="topMenuElements">
+                    <li>
+                        <a class="top_menu_el">Главная</a>&nbsp; |
+                    </li>
 
-                <li>
-                    <a class="top_menu_el">	&nbsp; Операции</a>&nbsp; |
-                    <ul>
-                        <li><a onclick="createWindow('Справочники','Classifiers')">Справочники</a></li>
-                        <li><a>Документы</a></li>
-                    </ul>
-                </li>
+                    <li>
+                        <a class="top_menu_el">	&nbsp; Операции</a>&nbsp; |
+                        <ul>
+                            <li><a onclick="createWindow('Справочники','Classifiers')">Справочники</a></li>
+                            <li><a>Документы</a></li>
+                        </ul>
+                    </li>
 
-                <li>
-                    <a class="top_menu_el">&nbsp; Сервис</a>&nbsp;|
-                </li>
+                    <li>
+                        <a class="top_menu_el">&nbsp; Сервис</a>&nbsp;|
+                    </li>
 
-                <li>
-                    <a class="top_menu_el" href="index.php/site/Logout">&nbsp; Выход</a>
-                </li>
-            </ul>
+                    <li>
+                        <a class="top_menu_el" href="index.php/site/Logout">&nbsp; Выход</a>
+                    </li>
+                </ul>
+            <?php }else{
+
+
+                    $this->widget('WTopMenu');
+
+            }?>
         </div>
 
 
         <div id="mainContent" style="margin-top: 100px">
             <?php echo $content; ?>
         </div>
-
+        <a class="top_menu_el" href="index.php/site/Logout">&nbsp; Выход</a>
     </div>
     <div id="footer">Management systems v_0.1</div>
 

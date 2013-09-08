@@ -39,7 +39,9 @@ class Users extends CActiveRecord
 	 */
 	public function relations()
 	{
-		return array();
+        return array(
+            'interfaceButtons'=>array(self::HAS_MANY, 'InterfaceButtons', 'users_id'),
+        );
 	}
 
 	/**

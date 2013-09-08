@@ -39,6 +39,7 @@ body {
     position:relative;
     cursor: pointer;
     float:left;
+    padding-right: 7px;
 }
 #topMenuElements li:hover ul{
     display:block;
