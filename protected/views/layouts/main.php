@@ -1,51 +1,48 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<!DOCTYPE html>
+<html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/main.css"/>
+    <link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/theme.css"/>
 </head>
 
 <body>
-<div id="mainBody">
-    <div id="leftContent">
-        <?
-            if(!Yii::app()->user->isGuest){
-        ?>
 
-        <div id="userInfoWidget">
-            <?php
-                $this->widget('CUserInfo');
-            ?>
-            <div class="clear"></div>
-        </div>
-        <div id="timeNow" style="margin-top: 10px;">qwerty</div>
-        <div id="userStatusBarsWidget">
-            <?php
-                $this->widget('CUserStatusBars');
-            ?>
-            <div class="clear"></div>
-        </div>
-        <div id="mainActionsWidget">
-            <b>Основные действия</b>
-            <?php
-                $this->widget('CMainActions');
-            ?>
-            <div class="clear"></div>
+    <div id="wrapper">
+        <div id="topMenu" class="topMenu">
+
+
+            <ul id="topMenuElements" class="topMenuElements">
+                <li>
+                    <a class="top_menu_el">Главная</a>&nbsp; |
+                </li>
+
+                <li>
+                    <a class="top_menu_el">	&nbsp; Операции</a>&nbsp; |
+                    <ul>
+                        <li><a onclick="createWindow('Справочники','Classifiers')">Справочники</a></li>
+                        <li><a>Документы</a></li>
+                    </ul>
+                </li>
+
+                <li>
+                    <a class="top_menu_el">&nbsp; Сервис</a>&nbsp;|
+                </li>
+
+                <li>
+                    <a class="top_menu_el">&nbsp; Помощь</a>
+                </li>
+            </ul>
+
+
         </div>
 
-        <?
-            }
-        ?>
     </div>
-    <div id="mainContent">
-        <?php echo $content; ?>
-    </div>
-</div>
+    <div id="footer">Management systems v_0.1</div>
 
-<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/jquery.js" type="text/javascript"></script>
-<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/main.js" type="text/javascript"></script>
-<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/time.js" type="text/javascript"></script>
+    <script src="<?php echo Yii::app()->request->baseUrl; ?>/js/jQuery.js" type="text/javascript"></script>
+    <script src="<?php echo Yii::app()->request->baseUrl; ?>/js/framework.js" type="text/javascript"></script>
+    <script src="<?php echo Yii::app()->request->baseUrl; ?>/js/main.js" type="text/javascript"></script>
 
 </body>
 </html>

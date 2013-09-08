@@ -31,7 +31,7 @@ class Users extends CActiveRecord
 		return array(
 			array('login', 'required'),
 			array('login', 'length', 'max'=>255),
-            array('frequency', 'numerical', 'integerOnly'=>true),
+            array('id', 'numerical', 'integerOnly'=>true),
 		);
 	}
 

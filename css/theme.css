@@ -1,0 +1,24 @@
+.topMenu{
+    background-color: #2d2d2d;
+}
+
+/* Top menu element Begin */
+.topMenuElements{
+    background-color: #2d2d2d;
+    color: #bbb !important;
+    border-bottom: 1px solid #e5e5e5;
+}
+.topMenuElements li{
+    background-color: #2d2d2d;
+    text-shadow:1px 1px 1px rgba(0,0,0,0.75);
+}
+.topMenuElements li:hover{
+    color: white;
+}
+.topMenuElements li ul li a{
+    color: #bbb;
+}
+.topMenuElements li ul li:hover a{
+    color:white;
+}
+/* Top menu element End */

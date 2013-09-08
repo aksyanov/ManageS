@@ -7,7 +7,7 @@
 // CWebApplication properties can be configured here.
 return array(
 	'basePath'=>dirname(__FILE__).DIRECTORY_SEPARATOR.'..',
-	'name'=>'Sim-Life v0.1',
+	'name'=>'Management system',
 
 	// preloading 'log' component
 	'preload'=>array('log'),
@@ -28,7 +28,7 @@ return array(
 			'allowAutoLogin'=>true,
 		),
 		'db'=>array(
-			'connectionString' => 'mysql:host=localhost;dbname=aksyanov_sim-life',
+			'connectionString' => 'mysql:host=mysql.aksyanov.myjino.ru;port=3306;dbname=aksyanov_manages',
 			'emulatePrepare' => true,
 			'username' => 'aksyanov',
 			'password' => 'Heckfy1993',

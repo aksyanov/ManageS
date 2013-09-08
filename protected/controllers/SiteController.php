@@ -25,29 +25,41 @@ class SiteController extends CController
     public function accessRules()
     {
         return array(
-            array('deny',
+            /*array('deny',
                 'actions'=>array('index'),
                 'users'=>array('?'),
-            ),
-            array('allow',
+            ),*/
+            /*
+            array('deny',
                 'actions'=>array('index'),
-                'users'=>array('@'),
+                'users'=>array('*'),
             ),
+
             array('allow',
                 'actions'=>array('logout'),
                 'users'=>array('*'),
-            ),
+            ),*/
 
         );
     }
 
 	public function actionIndex()
-	{echo date("M-d-Y", mktime(0, 0, 0, 12, 32, 1997));
+	{
+        //echo date("M-d-Y", mktime(0, 0, 0, 12, 32, 1997));
 		$this->render('index');
 	}
 
     public function actionLogin(){
-        if(isset($_POST['login_b'])){
+
+       /* $fUs = new Users();
+        $fUs->login = "asdas";
+
+        $fUs->save();*/
+
+        $post=Users::model()->findByPk(1);
+        echo $post->login;
+
+        /*if(isset($_POST['login_b'])){
             $identity = new UserIdentity($_POST['login'],$_POST['password']);
             if($identity->authenticate()){
                 Yii::app()->user->login($identity);
@@ -56,7 +68,7 @@ class SiteController extends CController
                 echo $identity->errorMessage;
             }
         }
-        $this->render('login');
+        $this->render('login');*/
     }
 
     public function actionLogout(){
